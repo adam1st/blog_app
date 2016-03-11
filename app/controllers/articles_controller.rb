@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
-  before_filter :set_article, only: [:show, :edit, :update, :destroy]
+  before_filter :set_article, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   
   def index
     @articles = Article.all
@@ -51,6 +51,22 @@ class ArticlesController < ApplicationController
     if @article.destroy
       flash[:success] = "Article has been deleted"
       redirect_to articles_path
+    end
+  end
+  def upvote
+    @article.upvote_by current_user
+    flash[:success] = "Successfully liked"
+    respond_to do |format|
+      format.html {redirect_to :back }
+      format.json { render json: { count: @article.liked_count } }
+    end
+  end
+  def downvote
+    @article.downvote_by current_user
+    flash[:success] = "Successfully disliked"
+    respond_to do |format|
+      format.html {redirect_to :back }
+      format.json { render json: { count: @article.disliked_count } }
     end
   end
   

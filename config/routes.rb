@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root to: 'articles#index'
-  resources :articles do 
+  resources :articles do
+    member do
+      put "like", to: "articles#upvote"
+      put "dislike", to: "articles#downvote"
+    end
     resources :comments
   end
   

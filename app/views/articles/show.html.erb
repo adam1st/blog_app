@@ -1,5 +1,16 @@
 <article class="detail-article">
   <h1 class="article-detail-title"><%= @article.title %></h1>
+    
+  <div class="votes">
+    <%= link_to like_article_path(@article), method: :put do %>
+      Like
+        <%= @article.get_upvotes.size %>
+    <% end %>
+    <%= link_to dislike_article_path(@article), method: :put do %>
+      Dislike
+        <%= @article.get_downvotes.size %>
+    <% end %>
+  </div>
   
   <div class="glyphicon glyphicon-calendar" id="article-date">
     <%= @article.created_at.strftime("%b %d, %Y") %>
