@@ -25,13 +25,9 @@ body {
   margin-bottom: 10px;
 }
 
-#article-date {
-  margin-bottom: 40px;
-}
-
 .article-detail-title {
   font-size: 4em;
-  margin-bottom: 40px;
+  margin-bottom: 1px;
 }
 
 .btn-space {
@@ -98,3 +94,11 @@ body {
   font-size: large;
 }
 
+#article-date {
+  margin-left: 100px;
+  color: white;
+}
+
+.voting {
+  color: white;
+}

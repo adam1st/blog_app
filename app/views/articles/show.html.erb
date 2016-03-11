@@ -1,13 +1,14 @@
 <article class="detail-article">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <h1 class="article-detail-title"><%= @article.title %></h1>
-  <div class="votes">
+  <div class="votes" id="likes-dislikes">
       <hr>
-    <%= link_to like_article_path(@article), method: :put do %>
-      Like
+    <%= link_to like_article_path(@article), method: :put, class: 'voting' do %>
+      <i class="fa fa-thumbs-up"></i>
         <%= @article.get_upvotes.size %>
     <% end %>
-    <%= link_to dislike_article_path(@article), method: :put do %>
-      Dislike
+    <%= link_to dislike_article_path(@article), method: :put, class: 'voting' do %>
+      <i class="fa fa-thumbs-down"></i>
         <%= @article.get_downvotes.size %>
     <% end %>
     
