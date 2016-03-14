@@ -3,13 +3,6 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {registrations: "registrations", sessions: "sessions", :omniauth_callbacks => "callbacks"}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  
-  #namespace :api, defaults: {format: :json} do
-  #  scope :v1 do
-  #    mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
-      # :controllers => { :sessions => "api/v1/sessions" }, 
-  #  end
-  #end
 
   # You can have the root of your site routed with "root"
   root to: 'articles#index'

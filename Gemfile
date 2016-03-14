@@ -11,7 +11,9 @@ gem 'devise', '~>3.5.1'
 gem 'omniauth'
 gem 'simple_token_authentication'
 gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
 gem 'acts_as_votable', '~> 0.10.0'
+#gem 'rack-cors'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

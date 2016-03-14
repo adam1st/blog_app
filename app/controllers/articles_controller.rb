@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
   before_filter :set_article, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  skip_before_filter :verify_authenticity_token, :only => [:upvote, :downvote]
   
   def index
     @articles = Article.all
@@ -58,7 +59,7 @@ class ArticlesController < ApplicationController
     flash[:success] = "Successfully liked"
     respond_to do |format|
       format.html {redirect_to :back }
-      format.json { render json: { count: @article.liked_count } }
+      format.json { render json: { count: @article.get_upvotes.size } }
     end
   end
   def downvote
@@ -66,7 +67,7 @@ class ArticlesController < ApplicationController
     flash[:success] = "Successfully disliked"
     respond_to do |format|
       format.html {redirect_to :back }
-      format.json { render json: { count: @article.disliked_count } }
+      format.json { render json: { count: @article.get_downvotes.size } }
     end
   end
   
