@@ -56,18 +56,34 @@ class ArticlesController < ApplicationController
   end
   def upvote
     @article.upvote_by current_user
-    flash[:success] = "Successfully liked"
-    respond_to do |format|
-      format.html {redirect_to :back }
-      format.json { render json: { count: @article.get_upvotes.size } }
+    if @article.vote_registered?
+      flash[:success] = "Successfully liked"
+      respond_to do |format|
+        format.html {redirect_to :back }
+        format.json { render json: { count: @article.get_upvotes.size } }
+      end
+    else
+      flash[:danger] = "You have already liked this"
+      respond_to do |format|
+        format.html {redirect_to :back }
+        format.json { render json: { status: :found }, status: 302 }
+      end
     end
   end
   def downvote
     @article.downvote_by current_user
-    flash[:success] = "Successfully disliked"
-    respond_to do |format|
-      format.html {redirect_to :back }
-      format.json { render json: { count: @article.get_downvotes.size } }
+    if @article.vote_registered?
+      flash[:success] = "Successfully disliked"
+      respond_to do |format|
+        format.html {redirect_to :back }
+        format.json { render json: { count: @article.get_downvotes.size } }
+     end
+    else
+      flash[:danger] = "You have already disliked this"
+      respond_to do |format|
+        format.html {redirect_to :back }
+        format.json { render json: { status: :found }, status: 302 }
+      end
     end
   end
   
