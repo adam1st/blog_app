@@ -6,7 +6,7 @@ gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
 gem 'bootstrap-sass', '~>3.3.4.1'
 gem 'autoprefixer-rails', '~>5.2.0'
-
+gem 'pg'
 gem 'devise', '~>3.5.1'
 gem 'omniauth'
 gem 'simple_token_authentication'
@@ -63,6 +63,5 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
