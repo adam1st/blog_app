@@ -23,15 +23,15 @@ class ArticlesController < ApplicationController
   end
   
   def edit
-    if @article.user != current_user
-      flash[:danger] = "You can only edit your own article"
+    if !current_user.admin?
+      flash[:danger] = "You are not an admin"
       redirect_to root_path
     end
   end 
   
   def update
-    if @article.user != current_user
-      flash[:danger] = "You can only edit your own article"
+    if !current_user.admin?
+      flash[:danger] = "You are not an admin"
       redirect_to root_path
     else
       if @article.update(article_params)
@@ -66,7 +66,7 @@ class ArticlesController < ApplicationController
       flash[:danger] = "You have already liked this"
       respond_to do |format|
         format.html {redirect_to :back }
-        format.json { render json: { status: :found }, status: 302 }
+        format.json { head :conflict }
       end
     end
   end
@@ -82,7 +82,7 @@ class ArticlesController < ApplicationController
       flash[:danger] = "You have already disliked this"
       respond_to do |format|
         format.html {redirect_to :back }
-        format.json { render json: { status: :found }, status: 302 }
+        format.json { head :conflict }
       end
     end
   end
